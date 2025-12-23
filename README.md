@@ -9,7 +9,9 @@ Technologies:
 - Python
 - Pandas
 - Scikit-learn
-- jypiter
+- numpy
+- matplotlib
+
 
 ---
 
