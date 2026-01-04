@@ -1,33 +1,46 @@
-import streamlit as st
-from pathlib import Path
+import pandas as pd
 import joblib
-from sklearn.base import BaseEstimator, TransformerMixin
+from pathlib import Path
 
-class IQRWinsorizer(BaseEstimator, TransformerMixin):
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+MODEL_PATH = BASE_DIR / "models" / "random_forest_pipeline.joblib"
+
+pipeline = joblib.load(MODEL_PATH)
+
+
+
+
+def predict(input_data: dict):
     """
-    Simple winsorization for all numerical columns.
-    Clips values outside [Q1-1.5*IQR, Q3+1.5*IQR].
+    Parameters
+    ----------
+    input_data: dict
+        Dictionary containing patient variables
+
+    Returns
+    -------
+    dict
+        {
+            “prediction”: string,
+            “probability”: string
+        }
     """
+    
 
-    def fit(self, X, y=None):
-        self.lower_ = X.quantile(0.25) - 1.5 * (X.quantile(0.75) - X.quantile(0.25))
-        self.upper_ = X.quantile(0.75) + 1.5 * (X.quantile(0.75) - X.quantile(0.25))
-        return self
+    X = pd.DataFrame([input_data])
 
-    def transform(self, X):
-        return X.clip(self.lower_, self.upper_, axis=1)
+    prediction = pipeline.predict(X)[0]
+    probability = pipeline.predict_proba(X)[0][1]
+    
+    prdction = ""
+    if int(prediction) == 1:
+        prdction = "Alive"
+    else:
+        prdction = "Dead"
 
-    def fit_transform(self, X, y=None):
-        return self.fit(X, y).transform(X)
-
-
-@st.cache_resource
-def load_pipeline():
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    MODEL_PATH = BASE_DIR / "models" / "random_forest_pipeline.joblib"
-    return joblib.load(MODEL_PATH)
-
-pipeline = load_pipeline()
-
-def predict(data):
-    return pipeline.predict(data)
+    
+    return {
+        "prediction": str(prdction),
+        "probability": str(int (float(probability)*100)) + " %"
+    }
