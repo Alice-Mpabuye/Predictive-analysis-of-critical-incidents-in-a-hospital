@@ -1,4 +1,4 @@
-# Sepsis survival preiction
+# Sepsis survival prediction
 
 This project focuses on the `predictive analysis of hospital critical incidents` using data science and machine learning techniques.
 The main objective is to concentrate on cases of `sepsis` observed in a hospital in order to develop a predictive model capable of estimating the probability of a patient being affected by this critical condition.
