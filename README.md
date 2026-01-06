@@ -1,9 +1,9 @@
-# Predictive Analysis of Critical Incidents in a Hospital
+# Sepsis survival preiction
 
-Work in progress.
+This project focuses on the `predictive analysis of hospital critical incidents` using data science and machine learning techniques.
+The main objective is to concentrate on cases of `sepsis` observed in a hospital in order to develop a predictive model capable of estimating the probability of a patient being affected by this critical condition.
 
-This project focuses on predictive analysis of hospital critical incidents
-using data analysis and machine learning techniques.
+For this project, we are using the dataset available at the following address:
 
 Technologies:
 - Python
@@ -11,6 +11,11 @@ Technologies:
 - Scikit-learn
 - numpy
 - matplotlib
+
+### medical context
+
+Sepsis is a life-threatening condition that occurs when the immune system reacts excessively to an infection, leading to organ dysfunction.
+Sepsis is one of the most common causes of death worldwide.
 
 
 ---
@@ -41,5 +46,17 @@ Cleaning was performed independently on each cohort. The rules applied include:
 After cleaning, the primary cohort went from 110,204 to 1,511 observations.
 No deletions were made between cohorts in order to preserve the independence of the sets.
 Due to the absence of a unique identifier per patient, it is not possible to trace each deleted line individually.
+
+## EDA + visualisation
+
+
+
+## Anomaly detection
+
+
+## Predictive model
+
+
+## Dashboard UX
 
 
